@@ -19,6 +19,12 @@ all:
 windows:
 	$(env) GOOS=windows GOARCH=amd64 go build -o $(cli).exe -ldflags="$(ldflags)" cmd/main.go
 
+macos:
+	$(env) GOOS=darwin GOARCH=arm64 go build -o $(cli).exe -ldflags="$(ldflags)" cmd/main.go
+
+linux:
+	$(env) GOOS=linux GOARCH=amd64 go build -o $(cli).exe -ldflags="$(ldflags)" cmd/main.go
+
 run:
 	$(env) go run -ldflags="$(ldflags)" cmd/main.go
 

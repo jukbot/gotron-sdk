@@ -1,18 +1,50 @@
 # TRON's go-sdk
 
+Forked from https://github.com/sunbankio/gotron-sdk
+
+## Getting started
+
+```zsh
+go get -u github.com/jukbot/gotron-sdk
+```
+
+## Create grpc client
+
+```go
+func Client() (*client.GrpcClient, error) {
+  c := client.NewGrpcClient("grpc.shasta.trongrid.io:50051")
+  c.SetAPIKey("YOUR_API_KEY_HERE")
+  err := c.Start(grpc.WithTransportCredentials(insecure.NewCredentials()))
+
+  if err != nil {
+    return nil, err
+  }
+
+  if c == nil {
+    return nil, errors.New("failed to create new client")
+  }
+  return c, nil
+}
+```
+
 GoSDK and TRON-CLI tool for TRON's blockchain via GRPC
 
-# Build
-
+## Build
 
 ```
 $ git pull -r origin master
 $ make
 ```
 
-### cross build for windows
-```
+### Build for each platform
+
+```zsh
+# MacOS (Apple silicon)
+make macos
+
+# Windows and Linux (x86)
 make windows
+make linux
 ```
 
 # Usage & Examples
@@ -66,7 +98,6 @@ based environment variables.
 ```bash
 GOTRON_SDK_DEBUG=true ./tronctl
 ```
-
 
 # GRPC TLS
 
